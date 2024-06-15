@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function AddRecipe() {
+export default function AddRecipe({ fetchRecipes }) {
   const [title, setTitle] = useState("");
 
   function addRecipe() {
@@ -9,6 +9,7 @@ export default function AddRecipe() {
     axios.post("http://localhost:8080/recipes", {
       title: title,
     });
+    fetchRecipes();
   }
 
   return (

@@ -1,4 +1,4 @@
-package com.backend.ReceptenApp;
+package com.backend.ReceptenApp.ingredients;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,17 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
 @NoArgsConstructor
-public class Recipe {
+@Getter
+public class Ingredient {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String title;
+    private String name;
 
-    public Recipe (String title) {
-        this.title = title;
+    public Ingredient (String name) {
+        this.name = name;
     }
 
 }

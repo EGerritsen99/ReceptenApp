@@ -1,5 +1,7 @@
 package com.backend.ReceptenApp;
 
+import com.backend.ReceptenApp.recipes.Recipe;
+import com.backend.ReceptenApp.recipes.RecipeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

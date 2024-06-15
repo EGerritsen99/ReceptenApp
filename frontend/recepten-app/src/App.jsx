@@ -8,22 +8,23 @@ function App() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchRecipes = async () => {
-    const response = await axios
+  function fetchRecipes() {
+    console.log("getting recipes");
+    axios
       .get("http://localhost:8080/recipes")
       .then((response) => {
-        setRecipes(response.data);
         console.log(response.data);
+        setRecipes(response.data);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  };
+  }
 
   useEffect(() => {
     fetchRecipes();
-  }, [recipes]);
+  }, []);
 
   if (loading) {
     return <>Loading....</>;
@@ -33,7 +34,7 @@ function App() {
     <div>
       <h2>Recipes</h2>
       <Recipes recipes={recipes} />
-      <AddRecipe />
+      <AddRecipe fetchRecipes={fetchRecipes} />
     </div>
   );
 }

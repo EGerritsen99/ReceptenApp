@@ -1,5 +1,6 @@
-package com.backend.ReceptenApp;
+package com.backend.ReceptenApp.recipes;
 
+import com.backend.ReceptenApp.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +9,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,9 +24,11 @@ public class RecipeController {
 //    }
 
     @GetMapping
-    public Iterable<Recipe> getAll(Pageable pageable) throws InterruptedException {
-        return recipeRepository.findAll(pageable);
+    public Iterable<Recipe> getAll(){
+        return recipeRepository.findAll();
     }
+
+
 
     @GetMapping("{id}")
     public Optional<Recipe> getById(@PathVariable long id) {
@@ -48,4 +50,13 @@ public class RecipeController {
         return ResponseEntity.created(locationOfNewRecipe).body(recipe);
     }
 
+
+    /////
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable long id) {
+        if (recipeRepository.findById(id).isPresent()) {
+            recipeRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else return ResponseEntity.notFound().build();
+    }
 }
