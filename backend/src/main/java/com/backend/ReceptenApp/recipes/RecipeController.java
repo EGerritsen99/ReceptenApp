@@ -2,7 +2,6 @@ package com.backend.ReceptenApp.recipes;
 
 import com.backend.ReceptenApp.BadRequestException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -12,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/recipes")
+@RequestMapping("/")
 @CrossOrigin("http://localhost:5173")
 public class RecipeController {
 
@@ -24,10 +23,9 @@ public class RecipeController {
 //    }
 
     @GetMapping
-    public Iterable<Recipe> getAll(){
+    public Iterable<Recipe> getAll() {
         return recipeRepository.findAll();
     }
-
 
 
     @GetMapping("{id}")
@@ -38,7 +36,7 @@ public class RecipeController {
 
     @PostMapping
     public ResponseEntity<Recipe> add(@RequestBody Recipe recipe, UriComponentsBuilder ucb) {
-        if(recipe.getId() != null) {
+        if (recipe.getId() != null) {
             throw new BadRequestException("The body of this POST-request should not contain an id");
         }
 
